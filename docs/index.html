@@ -9,12 +9,10 @@
     <script src="./seriously.chroma.js"></script>
     <script src="./seriously.contour.js"></script>
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@MsMakeCode" />
-    <meta name="twitter:creator" content="@MsMakeCode" />
     <meta property="og:url" content="http://microsoft.github.io/streamer" />
     <meta property="og:title" content="Microsoft Streamer" />
     <meta property="og:description"
-        content="**Streamer BETA** is an experimental web application that simplifies the creation of interactive, high quality coding videos. Streamer is designed for teachers, students or generally anyone who would want to do any kind of online MakeCode coding." />
+        content="**Streamer BETA** is an experimental web application that simplifies the creation of interactive, high quality coding videos. Streamer is designed for teachers, students or generally anyone who would want to demo a web site." />
     <meta property="og:image" content="http://microsoft.github.io/streamer/intro.png" />
     <style>
         /*
@@ -51,7 +49,9 @@ Use https://uifabricicons.azurewebsites.net/
             width: 100%;
             height: 100%;
         }
-
+        a.github {
+            font-size: 70%
+        }
         body.greenscreen {
             background: #00ff00 !important;
         }
@@ -571,7 +571,7 @@ Settings
         }
 
         /*
-    MakeCode editor box
+     editor box
 */
         #editor {
             position: absolute;
@@ -1291,8 +1291,8 @@ Settings
         </div>
         <div class="animated hidden" id="subtitles"></div>
         <div class="box animated hidden" id="selectapp">
-            <p>You need to share your screen with MakeCode to record it.</p>
-            <p>Go to <b>Application Window</b>, select <b>Microsoft MakeCode Streamer</b>
+            <p>You need to share your browser to record it.</p>
+            <p>Go to <b>Application Window</b>, select <b>Microsoft Streamer</b>
                 and click <b>Share</b>.</p>
             <p>Press the <b>stop</b> button when you are done recording.</p>
         </div>
@@ -1311,7 +1311,7 @@ Settings
                 <option value="100"></option>
             </datalist>
             <div class="header">
-                <h2>MakeCode Streamer
+                <h2>Microsoft Streamer <a href="https://github.com/microsoft/streamer" target="_blank" class="github">GitHub</a>
                 <span class="screensize"></span>
                 <span class="icons">
                     <button id="settingsreset" title="Reset settings"><i class="ms-Icon ms-Icon--Reset"></i></button>
@@ -1623,14 +1623,14 @@ Settings
                 <h1>Welcome to Streamer!</h1>
             </div>
             <div class="contents">
-                <p>Use this page to produce live or recorded MakeCode videos!
+                <p>Use this page to produce live or recorded videos!
                     Got a question or a comment ? Try the <a
-                        href="https://forum.makecode.com/t/introducing-makecode-streamer/2437"
+                        href="https://github.com/microsoft/streamer"
                         target="_blank">forum</a>!
                 </p>
                 <button class="pip" id="playpip" title="Watch the introduction video!">
-                    <video id="introvideo" title="Take the tour!" preload="metadata" poster="/intro.png"
-                        src="/intro.mp4"></video>
+                    <video id="introvideo" title="Take the tour!" preload="metadata" poster="./intro.png"
+                        src="./intro.mp4"></video>
                     <span id="takethetour">TAKE THE TOUR</span>
                 </button>
                 <button class="pip" id="skippip" title="I'm a pro already...">
