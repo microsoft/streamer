@@ -112,6 +112,7 @@ function onYouTubeIframeAPIReady() {
         await loadCamOverlays();
         await loadSettings();
         setScene("right");
+        loadSite();
         render();
         handleHashChange();
         tickEvent("streamer.load.ok");
@@ -121,6 +122,10 @@ function onYouTubeIframeAPIReady() {
         tickEvent("streamer.load.error");
         trackException(e, "load");
         console.error(e);
+    }
+    function loadSite() {
+        const config = readConfig();
+        setSite(config.extraSites[0] || "https://makecode.com");
     }
     function saveConfig(config) {
         if (!config)
@@ -722,10 +727,14 @@ function onYouTubeIframeAPIReady() {
         const config = readConfig();
         // update page style
         let css = "";
-        const styles = {};
-        let primary = config.stylePrimary || "#615fc7";
-        let menu = config.styleBorder || "#615fc7";
-        let background = config.styleBackground || "rgb(99, 93, 198)";
+        const styles = {
+            "primary": "#6633cc",
+            "menu": "#3454D1",
+            "background": "linear-gradient(45deg, rgba(99, 93, 198, 1) 0%, rgba(0, 212, 255, 1) 100%)"
+        };
+        let primary = config.stylePrimary || styles.primary || "#615fc7";
+        let menu = config.styleBorder || styles.styleBorder || "#615fc7";
+        let background = config.styleBackground || styles.background || "rgb(99, 93, 198)";
         css =
             `body {
 background: ${background};
