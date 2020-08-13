@@ -30,8 +30,6 @@ Use https://uifabricicons.azurewebsites.net/
             --video-small-width: 24%;
 
             --chat-side-height: 63%;
-
-            --multi-editor-short: 63%;
         }
 
 
@@ -583,18 +581,6 @@ Settings
             transition-delay: 0.2s;
         }
 
-        .multi #editor {
-            width: 50%;
-        }
-
-        #editor2 {
-            position: absolute;
-            width: 50%;
-            height: 89%;
-            top: 2%;
-            transition-delay: 0.3s;
-        }
-
         #subtitles {
             font-size: 2vw;
             position: absolute;
@@ -613,10 +599,6 @@ Settings
 
         /* zindex */
         #editor {
-            z-index: 0;
-        }
-
-        #editor2 {
             z-index: 0;
         }
 
@@ -998,89 +980,6 @@ Settings
             width: var(--video-width);
         }
 
-        /* right + multi */
-        body.rightscene.multi #editor {
-            width: 67%;
-        }
-
-        body.rightscene.multi #editor2 {
-            width: 28%;
-            left: 70%;
-            height: var(--multi-editor-short);
-        }
-
-        body.rightscene.multi .facecam {
-            width: 28%;
-        }
-
-        /* right + chat + multi */
-        body.rightscene.multi.chat #editor {
-            width: 36%;
-            left: 1%;
-            height: 88%;
-        }
-
-        body.rightscene.multi.chat #editor2 {
-            width: 36%;
-            left: 38.5%;
-            height: 88%;
-        }
-
-        body.rightscene.multi.chat #chat {
-            width: 22%;
-            right: 1%;
-            height: 63%;
-        }
-
-        body.rightscene.multi.chat .facecam {
-            width: 22%;
-            right: 1%;
-        }
-
-        /* right + multi + hardware */
-        body.rightscene.multi.hardware .hardwarecam {
-            right: 1%;
-            width: 25%;
-            bottom: 5%;
-        }
-
-        body.rightscene.multi.hardware .facecam {
-            right: 21%;
-            width: 22%;
-            bottom: 1.5%;
-        }
-
-        /** left + chat + hardware + chat + multi */
-        body.rightscene.hardware.multi.chat #editor {
-            width: 36%;
-            left: 1%;
-            height: 95%;
-        }
-
-        body.rightscene.hardware.multi.chat #editor2 {
-            width: 36%;
-            left: 38.5%;
-            height: 95%;
-        }
-
-        body.rightscene.hardware.multi.chat #chat {
-            right: 1%;
-            width: 22%;
-            height: 30%;
-        }
-
-        body.rightscene.hardware.multi.chat .hardwarecam {
-            right: 1%;
-            width: 22%;
-            bottom: 35%;
-        }
-
-        body.rightscene.hardware.multi.chat .facecam {
-            right: 1%;
-            width: 22%;
-            bottom: 1.5%;
-        }
-
         /* leftscene: browser with facecam on left left */
         body.leftscene #editor {
             left: 4%;
@@ -1143,36 +1042,6 @@ Settings
             right: 70%;
         }
 
-        /* left + multi*/
-        body.leftscene.multi #editor {
-            left: 1%;
-            width: 28%;
-            height: var(--multi-editor-short);
-        }
-
-        body.leftscene.multi #editor2 {
-            width: 67%;
-            left: 31%;
-        }
-
-        body.leftscene.multi .facecam {
-            right: 70%;
-            width: 28%;
-        }
-
-        /* left + multi + hardware */
-        body.leftscene.multi.hardware .hardwarecam {
-            right: 73%;
-            width: 25%;
-            bottom: 5%;
-        }
-
-        body.leftscene.multi.hardware .facecam {
-            right: 56%;
-            width: 22%;
-            bottom: 1.5%;
-        }
-
         /** leftscene + chat **/
         body.leftscene.chat #editor {
             left: 31%;
@@ -1190,61 +1059,7 @@ Settings
             height: var(--chat-side-height);
             width: 28%;
         }
-
-        /* left + chat + multi */
-        body.leftscene.multi.chat #editor {
-            width: 36%;
-            left: 24%;
-            height: 88%;
-        }
-
-        body.leftscene.multi.chat #editor2 {
-            width: 36%;
-            left: 62%;
-            height: 88%;
-        }
-
-        body.leftscene.multi.chat #chat {
-            width: 22%;
-            right: 77%;
-            height: 63%;
-        }
-
-        body.leftscene.multi.chat .facecam {
-            width: 22%;
-            right: 77%;
-        }
-
-        /** left + hardware + chat + multi */
-        body.leftscene.hardware.multi.chat #editor {
-            width: 36%;
-            left: 24%;
-            height: 88%;
-        }
-
-        body.leftscene.hardware.multi.chat #editor2 {
-            width: 36%;
-            left: 62%;
-            height: 88%;
-        }
-
-        body.leftscene.hardware.multi.chat #chat {
-            width: 22%;
-            height: 30%;
-            right: 77%;
-        }
-
-        body.leftscene.hardware.multi.chat .hardwarecam {
-            width: 22%;
-            bottom: 35%;
-            right: 77%;
-        }
-
-        body.leftscene.hardware.multi.chat .facecam {
-            width: 22%;
-            right: 77%;
-            bottom: 1.5%;
-        }
+=
 
         /* chatscene: facecam and stream chat */
         body.chatscene .facecam {
@@ -1256,10 +1071,6 @@ Settings
 
         body.chatscene #editor {
             left: -100%;
-        }
-
-        body.chatscene #editor2 {
-            right: -100%;
         }
 
         body.chatscene #title {
@@ -1342,7 +1153,6 @@ Settings
             filter: blur(10px);
         }
 
-        body.countdownscene #editor2,
         body.countdownscene #chat,
         body.countdownscene .facecam,
         body.countdownscene .hardwarecam {
@@ -1423,8 +1233,6 @@ Settings
     <iframe id="backgroundyoutube" class="full background" type="text/html"></iframe>
     <div id="container" class="container">
         <iframe class="box animated" id="editor" allow="usb;camera"
-            sandbox="allow-scripts allow-same-origin allow-top-navigation allow-downloads allow-popups allow-popups-to-escape-sandbox allow-forms"></iframe>
-        <iframe class="box animated" id="editor2" allow="usb;camera"
             sandbox="allow-scripts allow-same-origin allow-top-navigation allow-downloads allow-popups allow-popups-to-escape-sandbox allow-forms"></iframe>
         <iframe class="box animated" id="chat" sandbox="allow-scripts allow-same-origin"></iframe>
         <div role="button" class="box animated clickeable cam facecam" id="facecam">
@@ -1521,10 +1329,6 @@ Settings
                     <div class="field">
                         <label for="extrasitesarea">Extra web sites (one per line)</label>
                         <textarea id="extrasitesarea" rows="3"></textarea>
-                    </div>
-                    <div class="field">
-                        <input type="checkbox" id="multicheckbox"></input>
-                        <label for="multicheckbox">Dual pages. Browse two web pages.</label>
                     </div>
                     <div class="field">
                         <input type="checkbox" id="fullscreeneditorcheckbox"></input>

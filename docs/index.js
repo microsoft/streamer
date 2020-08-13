@@ -50,7 +50,6 @@ function onYouTubeIframeAPIReady() {
     const body = document.body;
     const container = document.getElementById("container");
     const editor = document.getElementById("editor");
-    const editor2 = document.getElementById("editor2");
     const selectapp = document.getElementById("selectapp");
     const facecamcontainer = document.getElementById("facecam");
     const facecam = document.getElementById("facecamvideo");
@@ -79,7 +78,7 @@ function onYouTubeIframeAPIReady() {
     const backgroundyoutube = document.getElementById('backgroundyoutube');
     const intro = document.getElementById('intro');
     const hasGetDisplayMedia = !!navigator?.mediaDevices?.getDisplayMedia;
-    const frames = [editor, editor2];
+    const frames = [editor];
     const paintColors = ["#ffe135", "#00d9ff", "#cf1fdb", "#ee0000"];
     const scenes = ["leftscene", "rightscene", "chatscene", "countdownscene"];
     const LEFT_SCENE_INDEX = scenes.indexOf("leftscene");
@@ -158,7 +157,6 @@ function onYouTubeIframeAPIReady() {
     }
     function defaultConfig() {
         const cfg = {
-            multiEditor: false,
             faceCamLabel: "",
             hardwareCamLabel: "",
             emojis: "😄🤔😭👀",
@@ -209,7 +207,6 @@ function onYouTubeIframeAPIReady() {
             scenes[state.sceneIndex],
             state.hardware && "hardware",
             state.chat && "chat",
-            config.multiEditor && "multi",
             state.paint && "paint",
             state.micError && "micerror",
             state.recording && "recording",
@@ -229,7 +226,7 @@ function onYouTubeIframeAPIReady() {
             !!ytVideoId ? "backgroundyoutube" : config.backgroundVideo ? "backgroundvideo" : config.backgroundImage && "parallax",
             config.countdownEditor && "countdowneditor",
             config.countdownEditorBlur && "countdowneditorblur",
-            config.fullScreenEditor && !config.multiEditor && "slim",
+            config.fullScreenEditor && "slim",
             (config.twitch || config.restream) && "haschat",
             config.faceCamGreenScreen && "hasthumbnail",
             config.stingerVideo && "hasstinger",
@@ -380,10 +377,7 @@ function onYouTubeIframeAPIReady() {
         if (ytid)
             url = createYouTubeEmbedUrl(ytid, true);
         startStinger(config.stingerVideo, () => {
-            if (config.multiEditor && state.sceneIndex == LEFT_SCENE_INDEX)
-                editor2.src = url;
-            else
-                editor.src = url;
+            editor.src = url;
         }, config.stingerVideoGreenScreen, config.stingerVideoDelay);
     }
     function setScene(scene) {
@@ -1578,13 +1572,6 @@ background-image: url(${config.backgroundImage});
             saveConfig(config);
             render();
         };
-        const multicheckbox = document.getElementById("multicheckbox");
-        multicheckbox.checked = !!config.multiEditor;
-        multicheckbox.onchange = function () {
-            config.multiEditor = !!multicheckbox.checked;
-            saveConfig(config);
-            render();
-        };
         const powerpointarea = document.getElementById("powerpointarea");
         powerpointarea.value = "";
         powerpointarea.oninput = function (e) {
@@ -2274,7 +2261,6 @@ background-image: url(${config.backgroundImage});
         };
         const measures = {
             hardwareCam: config.hardwareCamId ? 1 : 0,
-            multiEditor: config.multiEditor ? 1 : 0,
             twitch: config.twitch ? 1 : 0,
             restream: config.restream ? 1 : 0
         };
