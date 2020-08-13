@@ -124,7 +124,7 @@ function onYouTubeIframeAPIReady() {
     }
     function loadSite() {
         const config = readConfig();
-        setSite(config.extraSites[0] || "https://makecode.com");
+        setSite(config.extraSites[0] || "https://bing.com");
     }
     function saveConfig(config) {
         if (!config)
@@ -163,7 +163,7 @@ function onYouTubeIframeAPIReady() {
             micDelay: 300,
             title: "STARTING SOON",
             extraSites: [
-                "https://arcade.makecode.com"
+                "https://bing.com"
             ]
         };
         return cfg;
@@ -844,7 +844,7 @@ background-image: url(${config.backgroundImage});
     function loadChat() {
         const config = readConfig();
         if (config.twitch) {
-            chat.src = `https://www.twitch.tv/embed/${config.twitch}/chat?parent=makecode.com`;
+            chat.src = `https://www.twitch.tv/embed/${config.twitch}/chat?parent=microsoft.github.io`;
             if (!chat.parentElement)
                 container.insertBefore(chat, facecamcontainer);
         }
