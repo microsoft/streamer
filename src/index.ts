@@ -312,6 +312,7 @@ function onYouTubeIframeAPIReady() {
         const config = readConfig();
         const ytVideoId = parseYouTubeVideoId(config.backgroundVideo);
 
+        titleEl.innerText = config.title || ""
         body.className = [
             scenes[state.sceneIndex],
             state.hardware && "hardware",
