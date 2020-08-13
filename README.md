@@ -1,3 +1,32 @@
+---
+permalink: /docs
+---
+
+# Streamer
+
+Present your web sites like the streamers.
+
+Streamer uses HTML5 support for video and stream to created an immersive meeting experience. The original version of this tool was built for MakeCode at https://makecode.com/streamer.
+
+* Use streamer online at https://microsoft.github.io/streamer
+
+## Dev
+
+* install ``node.js``
+* run ``npm install`
+* to start a TypeScript compilation watch
+
+```
+tsc --watch
+```
+
+* to start a local developement server, run
+
+```
+npm run serve
+```
+
+* then navigate to http://localhost:8080/#
 
 # Contributing
 
