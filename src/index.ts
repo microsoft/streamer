@@ -97,8 +97,7 @@ const stingerEvents = {
     end: () => { }
 }
 function onYouTubeIframeAPIReady() {
-    youTubeReady = true;
-    console.log(`youtube ready`)
+    console.log(`youtube loading`)
     stingerPlayer = new YT.Player('stingeryoutube', {
         playerVars: {
             mute: 1,
@@ -112,7 +111,7 @@ function onYouTubeIframeAPIReady() {
         events: {
             onReady: () => {
                 console.log(`stinger youtube ready`)
-                const stingeryoutube = document.getElementById('stingeryoutube')
+                youTubeReady = true;
             },
             onError: () => {
                 const stingeryoutube = document.getElementById('stingeryoutube')
@@ -1323,11 +1322,16 @@ background-image: url(${config.backgroundImage});
         const parts = (hash || "").replace(/^#/, '').split('|');
         parts.forEach(part => {
             const frags = part.split(':')
-            if (frags.length >= 2) {
+            if (frags.length > 2) {
                 const action = frags.shift();
                 const arg = frags.shift();
-                const slug = frags.join(':')
                 switch (action) {
+                    case "url": {
+                        const config = readConfig()
+                        if(config.extraSites.indexOf(arg) < 0)
+                            config.extraSites.push(arg)
+                        setSite(arg)
+                    }
                 }
             }
         })
@@ -2520,7 +2524,7 @@ background-image: url(${config.backgroundImage});
         }
         const stingeryoutube = document.getElementById('stingeryoutube')
         const ytVideoId = parseYouTubeVideoId(url);
-        if (ytVideoId) {
+        if (ytVideoId && youTubeReady) {
             state.stingering = true;
             render();
             stopGreenScreen(stingervideo)
@@ -2551,8 +2555,8 @@ background-image: url(${config.backgroundImage});
             state.stingering = true;
             render();
             url = await resolveBlob(url)
-
-            stingerPlayer.stopVideo()
+            if (youTubeReady)
+                stingerPlayer.stopVideo()
             stingeryoutube.classList.add("hidden")
             stingervideo.src = url;
             stingervideo.onplay = () => {
@@ -2573,7 +2577,8 @@ background-image: url(${config.backgroundImage});
             }
         } else {
             stingervideo.src = undefined;
-            stingerPlayer.stopVideo()
+            if (youTubeReady)
+                stingerPlayer.stopVideo()
             stingervideo.classList.add("hidden");
             stingeryoutube.classList.add("hidden")
             state.stingering = false;
@@ -2650,6 +2655,7 @@ background-image: url(${config.backgroundImage});
                 })
             },
             gc: (urls: string[]) => {
+                /* need custom domain   
                 const transaction = db.transaction([STORE_BLOBS], "readwrite");
                 const blobs = transaction.objectStore(STORE_BLOBS)
                 const request = blobs.getAllKeys();
@@ -2660,6 +2666,7 @@ background-image: url(${config.backgroundImage});
                         console.log(`dead videos`, dead)
                     dead.forEach(api.del)
                 }
+                */
             }
         }
 
