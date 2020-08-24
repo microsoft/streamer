@@ -1276,7 +1276,7 @@ background-image: url(${config.backgroundImage});
             h: 1080,
             name: "HD 1080p"
         }, {
-            w: 1080,
+            w: 1280,
             h: 720,
             name: "SD 720p"
         }
