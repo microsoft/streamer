@@ -10,6 +10,10 @@ Streamer uses HTML5 support for video and stream to created an immersive meeting
 
 * Use streamer online at https://microsoft.github.io/streamer
 
+## Codespaces
+
+Just open and go.
+
 ## Dev
 
 * install ``node.js``
