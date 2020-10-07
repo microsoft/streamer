@@ -141,7 +141,6 @@ function onYouTubeIframeAPIReady() {
 (async function () {
     const body = document.body;
     const container = document.getElementById("container");
-    const editor = document.getElementById("editor") as HTMLIFrameElement;
     const selectapp = document.getElementById("selectapp");
     const facecamcontainer = document.getElementById("facecam");
     const facecam = document.getElementById("facecamvideo") as HTMLVideoElement;
@@ -171,7 +170,7 @@ function onYouTubeIframeAPIReady() {
     const intro = document.getElementById('intro')
     const hasGetDisplayMedia = !!(<any>navigator)?.mediaDevices?.getDisplayMedia;
 
-    const frames = [editor];
+    const cachedFrames: { [url: string]: HTMLIFrameElement } = {}
     const paintColors = ["#ffe135", "#00d9ff", "#cf1fdb", "#ee0000"];
 
     const scenes = ["leftscene", "rightscene", "chatscene", "countdownscene"];
@@ -186,6 +185,10 @@ function onYouTubeIframeAPIReady() {
         paintColor: paintColors[0],
     }
     const db = await openDbAsync()
+
+    function editor() {
+        return document.getElementById("editor") as HTMLIFrameElement        
+    }
 
     try {
         tickEvent("streamer.load.start")
@@ -503,7 +506,7 @@ function onYouTubeIframeAPIReady() {
             url = createYouTubeEmbedUrl(ytid, true)
 
         startStinger(config.stingerVideo, () => {
-            editor.src = url;
+            setFrameUrl(editor(), url);
         }, config.stingerVideoGreenScreen, config.stingerVideoDelay)
     }
 
@@ -773,7 +776,7 @@ function onYouTubeIframeAPIReady() {
                 painttoolCtx.beginPath();
                 painttoolCtx.moveTo(mouse.x, mouse.y);
             } else if (tool == 'arrow') {
-                painttoolCtx.lineWidth = 42;
+                painttoolCtx.lineWidth = Math.max(16, (paint.width / 60) | 0);
             }
         }
 
@@ -861,6 +864,26 @@ function onYouTubeIframeAPIReady() {
         }
     }
 
+    function setFrameUrl(frame: HTMLIFrameElement, url: string) {
+        const caches = cachedFrames;
+        let cached = caches[url];
+        if (!cached) {
+            cached = caches[url] = document.createElement("iframe");
+            cached.className = "box animated site hidden"
+            cached.setAttribute("allow", "usb;camera")
+            cached.setAttribute("sandbox", "allow-scripts allow-same-origin allow-top-navigation allow-downloads allow-popups allow-popups-to-escape-sandbox allow-forms");
+            cached.src = url;
+            frame.parentElement.insertBefore(cached, frame);
+        }
+
+        // insert and remove
+        frame.classList.add('hidden')
+        const id = frame.getAttribute("id");
+        frame.setAttribute("id", "")
+        cached.setAttribute("id", id)
+        cached.classList.remove('hidden')
+    }
+
     function loadStyle() {
         const config = readConfig();
         // update page style
@@ -910,7 +933,7 @@ background: ${primary};
         `
 
         const ytVideoId = parseYouTubeVideoId(config.backgroundVideo);
-        if (ytVideoId) {
+        if (ytVideoId && youTubeReady) {
             backgroundvideo.src = undefined;
             const url = createYouTubeEmbedUrl(ytVideoId, false)
             if (backgroundyoutube.src !== url)
